@@ -271,7 +271,7 @@ OSNumber* XboxOriginalControllerClass::newProductIDNumber() const
 
 OSString* XboxOriginalControllerClass::newProductString() const
 {
-    return OSString::withCString("Xbox 360 Wired Controller");
+    return OSString::withCString("Xbox original Controller");
 }
 
 static void logData(UInt8 *data, int len) {
@@ -316,8 +316,8 @@ IOReturn XboxOriginalControllerClass::handleReport(IOMemoryDescriptor * descript
             convertFromXBoxOriginal(data);
             if (memcmp(data, lastData, sizeof(XBOX360_IN_REPORT)) == 0) {
                 repeatCount ++;
-                // drop triplicate reports
-                if (repeatCount > 1) {
+                // drop duplicate reports
+                if (repeatCount > 0) {
                     return kIOReturnSuccess;
                 }
             } else {
